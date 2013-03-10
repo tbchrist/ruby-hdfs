@@ -5,10 +5,6 @@
 #include <string.h>
 #include <ctype.h>
 
-// Override flag in hdfs.h
-#define HDFS_O_RDONLY 0
-#define HDFS_O_WRONLY 2
-
 static VALUE m_hadoop;
 static VALUE m_dfs;
 static VALUE c_file_system;
@@ -123,9 +119,9 @@ VALUE HDFS_File_System_open(VALUE self, VALUE path, VALUE mode, VALUE options) {
 
   int flags = 0;
   if (strcmp("r", StringValuePtr(mode)) == 0) {
-    flags = HDFS_O_RDONLY;
+    flags = O_RDONLY;
   } else if (strcmp("w", StringValuePtr(mode)) == 0) {
-    flags = HDFS_O_WRONLY;
+    flags = O_WRONLY;
   } else {
     rb_raise(rb_eArgError, "Mode must be 'r' or 'w'");
     return;
