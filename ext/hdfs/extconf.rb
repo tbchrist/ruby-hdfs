@@ -3,6 +3,7 @@ require 'mkmf'
 java_home = ENV["JAVA_HOME"]
 unless java_home
   %w(
+    /usr/java/default
     /usr/lib/jvm/java-6-openjdk
   ).each do |path|
     if File.directory?(path)
