@@ -122,9 +122,9 @@ VALUE HDFS_File_System_open(VALUE self, VALUE path, VALUE mode, VALUE options) {
   Data_Get_Struct(self, FSData, data);
 
   int flags = 0;
-  if (strcmp("r", STR2CSTR(mode)) == 0) {
+  if (strcmp("r", StringValuePtr(mode)) == 0) {
     flags = HDFS_O_RDONLY;
-  } else if (strcmp("w", STR2CSTR(mode)) == 0) {
+  } else if (strcmp("w", StringValuePtr(mode)) == 0) {
     flags = HDFS_O_WRONLY;
   } else {
     rb_raise(rb_eArgError, "Mode must be 'r' or 'w'");
