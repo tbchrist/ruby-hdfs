@@ -107,6 +107,12 @@ VALUE HDFS_File_System_create_directory(VALUE self, VALUE path) {
   return value == 0 ? Qtrue : Qfalse;
 }
 
+VALUE HDFS_File_System_copy(VALUE self, VALUE source_path, VALUE dest_path) {
+  FSData* data = NULL;
+  Data_Get_Struct(self, FSData, data);
+  int value = hdfsCopy(data->fs, RSTRING_PTR(source_path), data->fs, RSTRING_PTR(dest_path));
+  return value == 0 ? Qtrue : Qfalse;
+}
 /**
  * call-seq:
  *    hdfs.open -> file
